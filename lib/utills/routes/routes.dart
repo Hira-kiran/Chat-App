@@ -1,5 +1,6 @@
 import 'package:chatapp_firebase/auth/loginScreen.dart';
 import 'package:chatapp_firebase/screens/home_screen.dart';
+import 'package:chatapp_firebase/screens/profile_screen.dart';
 import 'package:chatapp_firebase/screens/splash_screen.dart';
 import 'package:chatapp_firebase/utills/routes/routes_names.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,8 @@ class Routes {
         return MaterialPageRoute(builder: (context) => const LoginScreen());
       case RoutesNames.homeScreen:
         return MaterialPageRoute(builder: (context) => const HomeScreen());
+      case RoutesNames.profileScreen:
+        return MaterialPageRoute(builder: (context) => const ProfileScreen());
 
       default:
         return MaterialPageRoute(

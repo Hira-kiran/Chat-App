@@ -22,9 +22,10 @@ class ChatCardW extends StatelessWidget {
         leading: ClipRRect(
           borderRadius: BorderRadius.circular(mediaQuery.height * .3),
           child: CachedNetworkImage(
-            height: mediaQuery.height * .15,
+            height: mediaQuery.height * .12,
             width: mediaQuery.width * .15,
             imageUrl: user.image,
+            fit: BoxFit.fill,
             placeholder: (context, url) => const CircularProgressIndicator(),
             errorWidget: (context, url, error) => const Icon(Icons.error),
           ),

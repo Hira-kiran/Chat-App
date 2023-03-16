@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:chatapp_firebase/model/chat_model.dart';
+import 'package:chatapp_firebase/res/colors.dart';
 import 'package:flutter/material.dart';
 import '../main.dart';
 import '../servicess/intenses.dart';
@@ -39,7 +40,11 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text("Chat App"),
         actions: [
           IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
-          IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert)),
+          IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, RoutesNames.profileScreen);
+              },
+              icon: const Icon(Icons.more_vert)),
         ],
       ),
       body: StreamBuilder(
@@ -67,7 +72,9 @@ class _HomeScreenState extends State<HomeScreen> {
             }
           }),
       floatingActionButton: FloatingActionButton(
-          onPressed: () {}, child: const Icon(Icons.add_comment_rounded)),
+          backgroundColor: AppColors.blueColor,
+          onPressed: () {},
+          child: const Icon(Icons.add_comment_rounded)),
     );
   }
 }
