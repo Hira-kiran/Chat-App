@@ -1,4 +1,5 @@
-import 'package:chatapp_firebase/auth/loginScreen.dart';
+import 'package:chatapp_firebase/utills/routes/routes.dart';
+import 'package:chatapp_firebase/utills/routes/routes_names.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,7 +12,8 @@ void main() async {
   SystemChrome.setEnabledSystemUIMode(
       SystemUiMode.immersiveSticky); // open application full screen
 //Then go to andriod/app/src/main/res/values/style.xml // paste item line in it also pase same line in both style.xml files
-
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   runApp(const MyApp());
 }
 
@@ -26,7 +28,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           appBarTheme: const AppBarTheme(backgroundColor: Colors.purple),
           iconTheme: const IconThemeData(color: Colors.white)),
-      home: const LoginScreen(),
+      initialRoute: RoutesNames.splashScreen,
+      onGenerateRoute: Routes.generateRoute,
     );
   }
 }
