@@ -1,3 +1,4 @@
+import 'package:chatapp_firebase/res/colors.dart';
 import 'package:chatapp_firebase/utills/routes/routes.dart';
 import 'package:chatapp_firebase/utills/routes/routes_names.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Chat App',
       theme: ThemeData(
-          appBarTheme: const AppBarTheme(backgroundColor: Colors.purple),
+          appBarTheme: AppBarTheme(backgroundColor: AppColors.blueColor),
           iconTheme: const IconThemeData(color: Colors.white)),
       initialRoute: RoutesNames.splashScreen,
       onGenerateRoute: Routes.generateRoute,

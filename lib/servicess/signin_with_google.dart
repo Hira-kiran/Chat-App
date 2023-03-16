@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import 'intenses.dart';
+
 class GoogleSigninClass {
   // For Login with Google
   Future<UserCredential?> signInWithGoogle(BuildContext context) async {
@@ -30,7 +32,7 @@ class GoogleSigninClass {
 
   // For Logout from Google
   Future signOutGoogle() async {
-    await FirebaseAuth.instance.signOut();
+    await Instanses.auth.signOut();
     await GoogleSignIn().signOut();
   }
 }

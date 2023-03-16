@@ -1,12 +1,12 @@
 import 'dart:developer';
-
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:chatapp_firebase/model/chat_model.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-
+import '../main.dart';
+import '../servicess/intenses.dart';
 import '../servicess/signin_with_google.dart';
 import '../utills/routes/routes_names.dart';
 import '../utills/utills.dart';
+import '../widgets/chat_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -16,8 +16,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<ChatModel> chatList = [];
   @override
   Widget build(BuildContext context) {
+    mediaQuery = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -40,6 +42,30 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert)),
         ],
       ),
+      body: StreamBuilder(
+          stream: Instanses.firestore.collection("users").snapshots(),
+          builder: (context, snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.none:
+              case ConnectionState.waiting:
+                return const Center(child: CircularProgressIndicator());
+              case ConnectionState.active:
+              case ConnectionState.done:
+                final data = snapshot.data!.docs;
+                chatList =
+                    data.map((e) => ChatModel.fromJson(e.data())).toList();
+                if (chatList.isNotEmpty) {
+                  return ListView.builder(
+                      itemCount: chatList.length,
+                      physics: const BouncingScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return ChatCardW(user: chatList[index]);
+                      });
+                } else {
+                  return const Center(child: Text("NO Connection Found!"));
+                }
+            }
+          }),
       floatingActionButton: FloatingActionButton(
           onPressed: () {}, child: const Icon(Icons.add_comment_rounded)),
     );

@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:chatapp_firebase/main.dart';
 import 'package:chatapp_firebase/res/colors.dart';
 import 'package:chatapp_firebase/res/images.dart';
+import 'package:chatapp_firebase/servicess/intenses.dart';
 import 'package:chatapp_firebase/utills/routes/routes_names.dart';
 import 'package:chatapp_firebase/utills/utills.dart';
 import 'package:flutter/material.dart';
@@ -41,11 +42,17 @@ class _LoginScreenState extends State<LoginScreen> {
         InkWell(
           onTap: () {
             Utills.progressBar(context);
-            GoogleSigninClass().signInWithGoogle(context).then((value) {
+            GoogleSigninClass().signInWithGoogle(context).then((value) async {
               Navigator.pop(context);
               Utills().toastMethod("Login Successfully");
+              if ((await Instanses.userExists())) {
+                Navigator.pushNamed(context, RoutesNames.homeScreen);
+              } else {
+                await Instanses.createUser().then((value) {
+                  Navigator.pushNamed(context, RoutesNames.homeScreen);
+                });
+              }
 
-              Navigator.pushNamed(context, RoutesNames.homeScreen);
               log(value!.user.toString());
             }).onError((error, stackTrace) {
               Navigator.pop(context);
