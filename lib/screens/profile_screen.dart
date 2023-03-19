@@ -2,7 +2,6 @@
 
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chatapp_firebase/model/chat_model.dart';
 import 'package:chatapp_firebase/res/colors.dart';
@@ -229,13 +228,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       onPressed: () async {
                         final ImagePicker picker = ImagePicker();
                         // Pick an image
-                        final XFile? image =
-                            await picker.pickImage(source: ImageSource.gallery);
+                        final XFile? image = await picker.pickImage(
+                            source: ImageSource.gallery, imageQuality: 80);
                         if (image != null) {
                           log("Image Path: ${image.path} -- MimeType: ${image.mimeType}");
                           setState(() {
                             _img = image.path;
                           });
+                          Instanses.updateProfilePic(File(_img!));
                           // for hiding bottom sheet
                           Navigator.pop(context);
                         }
@@ -250,13 +250,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       onPressed: () async {
                         final ImagePicker picker = ImagePicker();
                         // Pick an image
-                        final XFile? image =
-                            await picker.pickImage(source: ImageSource.camera);
+                        final XFile? image = await picker.pickImage(
+                            source: ImageSource.camera, imageQuality: 80);
                         if (image != null) {
                           log("Image Path: ${image.path} -- MimeType: ${image.mimeType}");
                           setState(() {
                             _img = image.path;
                           });
+                          Instanses.updateProfilePic(File(_img!));
                           // for hiding bottom sheet
                           Navigator.pop(context);
                         }

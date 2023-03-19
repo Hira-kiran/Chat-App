@@ -1,13 +1,17 @@
 import 'dart:developer';
+import 'dart:io';
 import 'package:chatapp_firebase/model/chat_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class Instanses {
   // for authentication
   static FirebaseAuth auth = FirebaseAuth.instance;
   // for accessing cloud firestore database
   static FirebaseFirestore firestore = FirebaseFirestore.instance;
+  // for accessing  firebase sto
+  static FirebaseStorage firestoreStorage = FirebaseStorage.instance;
   // to return current user
   static User get user => auth.currentUser!;
   // for storing self info
@@ -62,5 +66,34 @@ class Instanses {
         .collection("users")
         .doc(user.uid)
         .update({"name": me.name, "about": me.about});
+  }
+
+//********************** for updating picture of user *****************
+  static Future<void> updateProfilePic(File file) async {
+    // getting image file extension
+    final extension = file.path.split(".").last;
+    log("Extension: $extension");
+
+    final ref =
+        firestoreStorage.ref().child("profile_pictures/${user.uid}.$extension");
+    // uploading image
+
+    await ref
+        .putFile(file, SettableMetadata(contentType: "image/$extension"))
+        .then((p0) {
+      log("Data Transferred:${p0.bytesTransferred / 1000} kb");
+    });
+
+    // uploading image in firestore database
+    me.image = await ref.getDownloadURL();
+    await firestore
+        .collection("users")
+        .doc(user.uid)
+        .update({"image": me.image});
+  }
+
+// get  all messages of specific conversation on firestore database
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getMessages() {
+    return firestore.collection("messages").snapshots();
   }
 }

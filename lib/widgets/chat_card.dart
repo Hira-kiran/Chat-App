@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chatapp_firebase/main.dart';
 import 'package:chatapp_firebase/model/chat_model.dart';
 import 'package:chatapp_firebase/res/colors.dart';
+import 'package:chatapp_firebase/screens/chat_screen.dart';
 import 'package:flutter/material.dart';
 
 class ChatCardW extends StatelessWidget {
@@ -16,7 +17,14 @@ class ChatCardW extends StatelessWidget {
           EdgeInsets.symmetric(horizontal: mediaQuery.width * .04, vertical: 6),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: ListTile(
-        onTap: () {},
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ChatScreen(
+                        user: user,
+                      )));
+        },
         title: Text(user.name),
         subtitle: Text(user.about),
         leading: ClipRRect(

@@ -1,12 +1,8 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'dart:developer';
 
-import 'package:chatapp_firebase/main.dart';
-import 'package:chatapp_firebase/res/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:image_picker/image_picker.dart';
 
 class Utills {
   // for Toast Message
