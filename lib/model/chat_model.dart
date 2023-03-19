@@ -8,15 +8,17 @@ class ChatModel {
     required this.creatingAt,
     required this.pushToken,
     required this.email,
+     required this.id,
   });
-  late final String image;
-  late final String about;
-  late final String name;
-  late final String lastActive;
-  late final bool isOnline;
-  late final String creatingAt;
-  late final String pushToken;
-  late final String email;
+  late  String image;
+  late  String about;
+  late  String name;
+  late  String lastActive;
+  late  bool isOnline;
+  late  String creatingAt;
+  late  String pushToken;
+  late  String email;
+  late  String id;
 
   ChatModel.fromJson(Map<String, dynamic> json) {
     image = json['image'] ?? "";
@@ -27,6 +29,7 @@ class ChatModel {
     creatingAt = json['creating_at'] ?? "";
     pushToken = json['push_token'] ?? "";
     email = json['email'] ?? "";
+     id = json['id'] ?? "";
   }
 
   Map<String, dynamic> toJson() {
@@ -39,6 +42,7 @@ class ChatModel {
     data['creating_at'] = creatingAt;
     data['push_token'] = pushToken;
     data['email'] = email;
+    data['id'] = id;
     return data;
   }
 }

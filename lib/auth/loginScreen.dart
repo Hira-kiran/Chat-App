@@ -45,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
             GoogleSigninClass().signInWithGoogle(context).then((value) async {
               Navigator.pop(context);
               Utills().toastMethod("Login Successfully");
-              if ((await Instanses.userExists())) {
+              if ((await Instanses.existsUser())) {
                 Navigator.pushNamed(context, RoutesNames.homeScreen);
               } else {
                 await Instanses.createUser().then((value) {

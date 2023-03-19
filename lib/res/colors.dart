@@ -5,5 +5,6 @@ class AppColors {
     static Color lightBlack = Colors.black54;
         static Color blueColor = const Color.fromARGB(255, 5, 88, 155);
         static Color redColor = Colors.red;
+            static Color whileColor = Colors.white;
 
 }
